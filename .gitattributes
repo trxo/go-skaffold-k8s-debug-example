@@ -1,0 +1,7 @@
+*.go linguist-language=Go
+
+vendor/ linguist-vendored
+
+*.md linguist-documentation
+
+data/*.html linguist-generated

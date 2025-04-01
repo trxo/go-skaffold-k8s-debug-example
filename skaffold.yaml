@@ -1,0 +1,26 @@
+# To learn more about the skaffold.yaml schema visit
+# https://skaffold.dev/docs/references/yaml/
+apiVersion: skaffold/v4beta12
+kind: Config
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+    - context: .
+      image: core.harbor.domain/library/go-hello-world
+  # local: # 使用local而不是googleCloudBuild
+  #   push: false
+
+manifests:
+  # kustomize:
+  #   paths:
+  #     - ./kubernetes-manifests/
+  rawYaml:
+    - ./kubernetes-manifests/**
+
+profiles:
+  - name: cloudbuild
+    build:
+      googleCloudBuild:
+        projectId: "123"
+        dockerImage: gcr.io/cloud-builders/docker

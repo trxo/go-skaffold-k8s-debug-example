@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run on Kubernetes",
+      "type": "cloudcode.kubernetes",
+      "request": "launch",
+      "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+      "watch": true,
+      "cleanUp": true,
+      "portForward": true,
+      "imageRegistry": "core.harbor.domain",
+      "debug": [
+        {
+          "image": "core.harbor.domain/library/go-hello-world",
+          "containerName": "server",
+          "sourceFileMap": {
+            "${workspaceFolder}": "/hello-world"
+          }
+        }
+      ]
+    },
+    {
+      "type": "go",
+      "request": "launch",
+      "name": "Launch (local)",
+      "mode": "auto",
+      "program": "${workspaceFolder}/cmd/hello-world"
+    }
+  ]
+}
